@@ -1,0 +1,27 @@
+//Adding project to github
+
+git init 
+git add .
+git status
+git commit -m "first commit"
+
+
+//for remote repository
+
+//git remote add <shortName> <url>
+git remote add origin "https://github.com/mk-grz/sample.git"
+//git push -u <shortName> <local-name>
+git push -u origin javascript 
+
+
+//for branch 
+
+git init
+git add .
+git status
+git commit -m "message"
+git branch <name>  //cannot make a branch before commit because it need a master branch before that
+git remote add origin "link"
+git push -u origin <branchname>
+
+
