@@ -1,0 +1,21 @@
+<html>
+<head></head>
+<body>
+    <div>
+        <%- include ('partials/nav.ejs') %>
+        <h1>this is profile page</h1>
+        <h2>the id is: <%= id%></h2>
+        <h3>Age:<span><%= data.age%></span></h3>
+        <h3>Profile: <span><%= data.job%></span></h3>
+        <h3>Hobbies</h3>
+        <ul>
+            <% data.hobbies.forEach(function(val){ %>
+                <li><%= val%></li>
+            <% })%>
+
+        </ul>
+        
+    </div>
+</body>
+
+</html>
