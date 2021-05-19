@@ -1,0 +1,73 @@
+//1.Crete Dockerfile 
+//2. create .dockerignore
+
+//Build (to create  an image)
+sudo docker build -t name . //-t = (tag) 
+
+//show images
+sudo docker images
+
+//to run the container
+
+sudo docker run -p 4000:4000 -d --name containerName image_name // -d (detached) -p (port)
+
+//to list containers
+sudo docker ps -a
+
+//to list running container 
+sudo docker ps
+
+//to remove image
+sudo docker rmi image_name -f
+
+//to remove container
+sudo docker rm containerName -f
+
+//to remove all containers
+sudo docker system prune
+
+//to stop a running container
+sudo docker stop containerName
+
+//to restart container
+sudo docker containerName
+
+//to look at the files in docker
+sudo docker exec -it containerName bash
+
+//to list the items inside the docker container 
+ls
+
+//to open a file 
+cat fileName
+
+//create volumes to sync the files
+sudo docker run -v /home/GRAZITTI/mahima/Documents/Docker:/usr/src/app -p 4020:4010 -d  node-image
+
+//to install nodemon as a dev dependency
+npm install nodemon -save-dev
+
+//to rename container
+sudo ps rename oldName newName
+
+//to print the logs of the container
+docker logs containerName
+
+
+//to make bindmount read only
+sudo docker run -v /home/GRAZITTI/mahima/Documents/Docker:/usr/src/app:ro -p 4020:4010 -d  node-image
+
+
+//to delete along with the volume
+sudo docker rm containerName -fv 
+
+version: "3"
+services:
+    node-container:
+        build: .
+        ports: 
+            - "4020:4010"
+        volumes: 
+            - ./:/usr/src/app   
+      
+             

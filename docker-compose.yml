@@ -1,0 +1,10 @@
+version: "3"
+services:
+    node-container:
+        build: .
+        ports: 
+            - "4020:4010"
+        volumes: 
+            - ./:/usr/src/app   
+      
+             
