@@ -1,0 +1,58 @@
+<form >
+
+    <button (click)="toggle()">Search By PIN</button>
+    
+    <button (click)="getStates()">Search By District</button>
+    
+    <div *ngIf="bool; else elseBlock">
+
+        <br><br>
+        <label for="state_selected">Select State</label>
+        <br>
+        <select name="state_selected" [(ngModel)]="state_selected" (click)="getDistrict()">
+            <option *ngFor="let state of states" value="{{state.state_id}}">{{state.state_name}}</option>
+        </select>
+
+        <br><br>
+        <label for="district_selected">Select City</label>
+        <br>
+        <select name="district_selected" [(ngModel)]="district_selected">
+            <option *ngFor="let district of cities" value="{{district.district_id}}">{{district.district_name}}</option>
+        </select>
+
+        <br><br>
+        <button (click)="checkSlotByDistrict()">Search</button>
+
+    </div>
+
+    <ng-template #elseBlock>
+        <br><br>
+
+        <input type="text" name="PINcode" placeholder="Enter PIN Code" [(ngModel)]="PINcode">
+
+        <br><br>
+        <button (click)="checkSlotByPin()">Search</button>
+
+    </ng-template>
+
+
+    <div *ngFor = "let c of center">
+        <h3>{{c.name}}</h3>
+        <p>{{c.address}},{{c.district_name}},{{c.state_name}}</p>
+            <h4>{{c.fee_type}}</h4>
+
+            <div *ngIf= 'c.fee'>
+                <h5>Rs./{{c.fee}}</h5>
+            </div>
+
+            <p>Slots: {{c.available_capacity}}</p>
+            <p>Age {{c.min_age_limit}}</p>
+            <h5>{{c.vaccine}}</h5>
+            <div *ngIf='c.available_capacity'>
+                <button (click)="bookSlot(c.center_id)">Book Now</button>
+            </div>
+        <br><br>
+    </div>
+
+</form>
+

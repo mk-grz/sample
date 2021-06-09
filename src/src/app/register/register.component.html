@@ -1,0 +1,34 @@
+<form #registerForm="ngForm">
+
+    <label for="id_proof">Photo Id Proof</label>   
+    <br>
+    <select [(ngModel)]="id_proof" name="id_proof" >
+        <option  *ngFor="let proof of photo_id_proof" value="{{proof.name}}">{{proof.name}}</option>
+    </select>
+    <br><br>
+
+    <input type="text" name="photo_id_no" [(ngModel)]="photo_id_no" placeholder="Photo Id no " >
+    <br><br>
+
+    <input type="text" name="name" [(ngModel)]="name" placeholder="name" >
+    <br><br>
+
+
+    <input type="radio" name="gender" [(ngModel)]="gender" value="male" placeholder="gender" >
+    <label for="gender">Male</label>
+    
+    <input type="radio" name="gender" [(ngModel)]="gender" value="female" placeholder="gender" >
+    <label for="gender">Female</label>
+    
+    <input type="radio" name="gender" [(ngModel)]="gender" value="other" placeholder="gender" >
+    <label for="gender">Other</label>
+    <br><br>
+
+
+    <input type="text" name="age" [(ngModel)]="age" placeholder="age" >
+    <br><br>
+
+    <button type="submit" (click)="submit()">Regsiter</button>
+</form>
+<br>
+

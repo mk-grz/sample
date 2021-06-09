@@ -1,0 +1,19 @@
+<h2>Appointment Confirmation</h2>
+
+<h3>{{center.name}}</h3>
+<p>{{center.address}},{{center.district_name}},{{center.state_name}}</p>
+  
+<h4>Vaccine Name: {{center.vaccine}}</h4>
+<h4>Date: {{center.date}}</h4>
+
+<hr>
+{{userDetails[0].name}}
+<hr>
+
+<div *ngFor="let slot of slots">
+    <button >{{slot}}</button>
+</div>
+<br>
+
+<button (click)="submit()">Confirm</button>
+

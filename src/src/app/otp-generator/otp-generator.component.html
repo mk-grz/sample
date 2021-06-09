@@ -1,0 +1,21 @@
+
+<form #otpForm="ngForm">
+    <input type="text" name="phoneNo" [(ngModel)]="phoneNo.phoneNo" placeholder="Phone No" >
+    <br><br>
+ 
+    <button (click)="getOtp()">Submit</button>
+  <br><br>
+  <input type="text" name="code" [(ngModel)]="code" placeholder="Enter Otp " >
+  <br><br>
+  <button (click)="verifyCode()">Verfiy Otp</button>
+</form>
+<br>
+<form >
+  <input type="text" name="tempNo" [(ngModel)]="tempNo" placeholder="Phone No" >
+  <button (click)="navigate()">Submit</button>
+</form>
+<br><br>
+
+{{status}}
+
+
