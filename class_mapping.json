@@ -1,0 +1,14 @@
+{
+    "mappings": {
+       
+        "properties": {
+            "name": { "type" : "text" },
+                "price": { "type" : "float" },
+                "description": { "type" : "text" } ,
+                "status":{ "type":"text"},
+                "quantity":{"type":"integer"}
+        }    
+    }                   
+  
+}
+  

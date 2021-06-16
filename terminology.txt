@@ -1,0 +1,19 @@
+Index       - database
+Type        - Table
+Fields      - Columns
+database    - rows
+
+
+//Relevancy and Scoring
+
+//Ways of searching
+//1.Query string
+query is passed in header
+
+//2.Query DSL
+query is passes in body
+
+
+
+
+
