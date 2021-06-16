@@ -1,21 +1,53 @@
+<div class="card">
+  <h2>Mobile Number Verification</h2>
+</div>
 
-<form #otpForm="ngForm">
-    <input type="text" name="phoneNo" [(ngModel)]="phoneNo.phoneNo" placeholder="Phone No" >
+<mat-card class="example-card card" >
+  <form #otpForm="ngForm"  (ngSubmit)="getOtp(otpForm)" >
+    <mat-form-field class="example-full-width">
+      <input type="text" matInput name="phoneNo" [(ngModel)]="otpForm.phoneNo" #phoneNo = "ngModel" placeholder="Phone No" required minlength="10">
+    </mat-form-field>
+    <br>
+
+    <div class="danger" *ngIf=" !phoneNo?.valid && (phoneNo.dirty || phoneNo.touched)">
+      <div *ngIf="phoneNo.errors.required">
+          Phone Number Required*
+      </div>
+      <div *ngIf="phoneNo.errors.minlength">
+          Min length is {{phoneNo.errors.minlength.requiredLength}}
+      </div>
+    </div>
+    <br>
+      <button class="submit" mat-raised-button color="primary" [disabled]="!otpForm.valid">Submit</button>
     <br><br>
- 
-    <button (click)="getOtp()">Submit</button>
-  <br><br>
-  <input type="text" name="code" [(ngModel)]="code" placeholder="Enter Otp " >
-  <br><br>
-  <button (click)="verifyCode()">Verfiy Otp</button>
-</form>
-<br>
-<form >
-  <input type="text" name="tempNo" [(ngModel)]="tempNo" placeholder="Phone No" >
-  <button (click)="navigate()">Submit</button>
-</form>
-<br><br>
 
-{{status}}
+    </form>
 
+    <form #codeForm="ngForm"  (ngSubmit)="verifyCode(codeForm)" >
+  
+
+    <div class="display" style="display: none;">
+        <mat-form-field class="example-full-width">
+          <input type="text" matInput name="code" [(ngModel)]="codeForm.code" #code="ngModel" placeholder="Enter Otp " required>
+        </mat-form-field>
+        <br>
+
+        <div class="danger" *ngIf=" !code?.valid && (code.dirty || code.touched)">
+              Otp Required*
+        </div>
+    
+
+        <button class="submit" mat-raised-button color="primary" [disabled]="!codeForm.valid" >Verfiy Otp</button>
+    </div>
+
+  </form>
+  <br>
+  <!-- <form >
+    <input type="text" name="tempNo" [(ngModel)]="tempNo" placeholder="Phone No" >
+    <button (click)="navigate()">Submit</button>
+  </form> -->
+
+  {{status}}
+
+  </mat-card>
 

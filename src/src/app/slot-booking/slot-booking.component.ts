@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from '../services/register.service';
 
@@ -9,35 +10,51 @@ import { RegisterService } from '../services/register.service';
 })
 export class SlotBookingComponent implements OnInit {
 
-  centers  = JSON.parse(localStorage.getItem("centers")) || [];
-  centerId = JSON.parse(localStorage.getItem("centerId")) || [];
+ // centers  = JSON.parse(localStorage.getItem("centers")) || [];
+ // centerId = JSON.parse(localStorage.getItem("centerId")) || [];
+
   userDetails = JSON.parse(localStorage.getItem("userDetails")) || [];
-  center:any;
-  slots:any;
-  slot_timings:any;
+  timings:any;
+  slots:any=[];
+  userData:any;
+  data:any=[];
 
   constructor(private registerService:RegisterService,private router:Router) {
   
-    this.centers.map((items:any)=>{
-      if(items.center_id == this.centerId){
-        this.center = items;
-        this.slots = items.slots;
-      }
+    this.slots.push(this.router.getCurrentNavigation().extras.state);
+
+    this.userDetails.map((item:any)=>{
+      this.userData = item;
     })
-   }
+    console.log(this.userData);
+  }
+
+  @ViewChild('slotForm') slotForm: NgForm;
 
   ngOnInit(): void {
   }
 
-  submit(){
-
-    console.log(this.slot_timings);
-    console.log(this.center.state_name,this.center.district_name,this.center.name,this.center.date,this.center.vaccine);
-
-    // this.registerService.updateUser(this.center.state_name,this.center.district_name,this.center.name,this.center.date,this.center.vaccine).subscribe(result=>{
+  submit(slotForm:any){
+  
+    this.slots.map((item:any)=>{
       
-    //   this.router.navigateByUrl('/login');
-    // })
+      this.userData.city = item.district_name;
+      this.userData.state = item.state_name;
+      this.userData.hospital_dose1 = item.name;
+      this.userData.time_slot_dose1 = slotForm.timings;
+      this.userData.vaccine = item.vaccine;
+      this.userData.date_dose1 = item.date;
+
+      this.data.push(this.userData);
+      
+      localStorage.setItem("userDetails",JSON.stringify(this.data));
+
+      this.registerService.updateUser(this.userData).subscribe(result=>{
+        this.router.navigate(['/login']);
+      })
+  
+    })
+
 
   }
 

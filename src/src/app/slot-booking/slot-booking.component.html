@@ -1,19 +1,31 @@
-<h2>Appointment Confirmation</h2>
+<mat-card class="example-card card" >
 
-<h3>{{center.name}}</h3>
-<p>{{center.address}},{{center.district_name}},{{center.state_name}}</p>
-  
-<h4>Vaccine Name: {{center.vaccine}}</h4>
-<h4>Date: {{center.date}}</h4>
+<form #slotForm="ngForm" (ngSubmit)="submit(slotForm)">
+    <h2>Appointment Confirmation</h2>
 
-<hr>
-{{userDetails[0].name}}
-<hr>
-
+    <mat-toolbar class="toolbar" color="primary">
+        {{userDetails[0].name}}
+    </mat-toolbar>
+ 
+<br>
 <div *ngFor="let slot of slots">
-    <button >{{slot}}</button>
+    <h3>{{slot.name}}</h3>
+    <p>{{slot.address}},{{slot.district_name}},{{slot.state_name}}</p>
+
+    <h4>{{slot.vaccine}}</h4>
+    <h4>Date: {{slot.date}}</h4>
+
+    <mat-form-field >
+        <mat-label>Select Timing Slot</mat-label>
+        <mat-select [(ngModel)]="slotForm.timings" #timings= "ngModel" name="timings" >
+            <mat-option  *ngFor="let slot_timings of slot.slots" value="{{slot_timings}}">{{slot_timings}}</mat-option>
+        </mat-select>    
+    </mat-form-field>
 </div>
 <br>
 
-<button (click)="submit()">Confirm</button>
+<button class="submit" mat-raised-button color="primary" >Confirm</button>
+    <br><br>
+</form>
 
+</mat-card>

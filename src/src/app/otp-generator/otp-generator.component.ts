@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Phone } from '../Phone';
 import { PhoneNoService } from '../services/phone-no.service';
 import {NavigationExtras, Router} from '@angular/router'
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-otp-generator',
@@ -10,20 +11,24 @@ import {NavigationExtras, Router} from '@angular/router'
 })
 export class OtpGeneratorComponent implements OnInit {
 
-  phoneNo:Phone=Object.create({});
+  phoneNo:any;
   code:any;
   ob:any={};
   status:any;
   tempNo:any;
   result:any;
+  mobile:any;
 
   constructor(private phoneNoService:PhoneNoService,private router:Router) { }
 
-  
+  @ViewChild('otpForm') otpForm: NgForm;
+  @ViewChild('codeForm') codeForm: NgForm;
+
   ngOnInit(): void {
   }
 
   navigate(){
+
     this.phoneNoService.already_registered(this.tempNo).subscribe(result=>{
 
       this.result = result; 
@@ -40,21 +45,24 @@ export class OtpGeneratorComponent implements OnInit {
 
   }
 
-  verifyCode(){
-    this.phoneNoService.verifyOtp(this.code,this.phoneNo.phoneNo).subscribe(data=>{
+  verifyCode(codeForm:any){
+    console.log(this.mobile);
+    console.log(codeForm.code);
+    this.phoneNoService.verifyOtp(codeForm.code,this.mobile).subscribe(data=>{
       this.ob=data;
       if(this.ob.status=="approved"){
           this.status = "verified";
-          this.phoneNoService.already_registered(this.phoneNo.phoneNo).subscribe(result=>{
-           
-            localStorage.setItem("phoneNo",this.tempNo);
+          this.phoneNoService.already_registered(this.mobile).subscribe(result=>{
+            this.result = result; 
+
+            localStorage.setItem("phoneNo",this.mobile);
 
             if(this.result.length == 0){
               this.router.navigate(['register']);
             }else{
                 localStorage.setItem("userDetails",JSON.stringify(this.result));
                 this.router.navigate(['login']);
-            }
+            } 
             
         })
 
@@ -62,13 +70,22 @@ export class OtpGeneratorComponent implements OnInit {
         this.status = "Enter Otp again";
       }
     })   
+    
   }
 
-  getOtp(){
-    //console.log(this.phoneNo.phoneNo);   
-    // this.phoneNoService.getOtp(this.phoneNo.phoneNo).subscribe(data=>{
-      
-    // })
+  getOtp(otpForm:any){
+    console.log(otpForm.phoneNo);
+    this.mobile = otpForm.phoneNo;
+
+    // const element =  document.getElementsByClassName('display')[0] as HTMLElement;
+    // element.style.display = "block";
+
+    this.phoneNoService.getOtp(otpForm.phoneNo).subscribe(data=>{   
+      console.log(data);
+      const element =  document.getElementsByClassName('display')[0] as HTMLElement;
+      element.style.display = "block";
+    })
+   
   }
 
 }

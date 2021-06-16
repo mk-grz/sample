@@ -12,6 +12,8 @@ import { from } from 'rxjs';
 import { LoginComponent } from './login/login.component';
 import { SearchHospitalComponent } from './search-hospital/search-hospital.component';
 import { SlotBookingComponent } from './slot-booking/slot-booking.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { SlotBookingComponent } from './slot-booking/slot-booking.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
