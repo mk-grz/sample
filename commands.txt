@@ -24,6 +24,8 @@ git branch <name>  //cannot make a branch before commit because it need a master
 git remote add origin "link"
 git push -u origin <branchname>
 
+//push changes to already exsting branch to the remote branch
+git push origin local_branch_name:remote_branch_name
 
 //to revert changes made by reset command
 $ git init
