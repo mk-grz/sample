@@ -70,4 +70,5 @@ services:
         volumes: 
             - ./:/usr/src/app   
       
-             
+ //to run a docker compose file
+ dcoker-compose up
