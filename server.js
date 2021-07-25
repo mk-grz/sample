@@ -6,7 +6,7 @@ const mysql = require('mysql');
 const axios = require('axios');
 const multer = require('multer');
 var request = require('request');
-const port = 3010;
+const port = process.env.PORT || 3010;
 
 
 const app = express();
