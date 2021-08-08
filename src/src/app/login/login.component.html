@@ -1,0 +1,43 @@
+<div class="card">
+    <h1 >Account Details</h1>
+    <h3>Registered Mobile Number: {{userData[0].phoneNo}}</h3>
+</div>
+    <mat-card class="example-card card" >
+
+        <mat-toolbar class="toolbar" color="primary" >
+             {{userData[0].name}}
+         </mat-toolbar>
+         <br>
+
+         <div class="row">
+             <div class="col-1">
+                <h4>Age: <b>{{userData[0].age}}</b></h4>
+                <h4>Photo ID: {{userData[0].photo_id_proof}}</h4>
+                <h4>ID Number: {{userData[0].photo_id_no}}</h4>
+                
+            </div>
+            <div class="col-2">
+               <img src="//localhost:3010/images/{{userData[0].photo}}" alt="img" style="width: 150px; height: 150px;">
+                <br>
+               <!-- <a href="//localhost:3010/images/{{userData[0].photo}} " target="_blank">link</a> -->
+                <br>
+               <button mat-raised-button color="primary" (click)="Download(userData[0].photo)">Download</button>
+            </div>
+        </div>
+        <br>
+        <hr>
+    <h2>Dose1</h2>
+
+    <a mat-raised-button routerLink="/search">Schedule Appointment</a>
+    <br><br>
+    <p>{{userData[0].hospital_dose1}}{{userData[0].state}}{{userData[0].city}}</p>
+    <p>{{userData[0].date_dose1}}</p>
+    <p style="font-weight: bold;">{{userData[0].vaccine}}</p>
+    <p>{{userData[0].time_slot_dose1}}</p>
+</mat-card>
+<br><br>
+
+<router-outlet></router-outlet>
+
+
+    

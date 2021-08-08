@@ -1,0 +1,36 @@
+.toggle
+{
+    margin: 10px;
+}
+.tag{
+    float: right;
+}
+.search{
+    width: 35%;
+}
+.age{
+    color:red;
+}
+h4{
+    font-weight: bold;
+}
+.available{
+    color: green;
+}
+.col{
+    display:flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+ }
+ .col-1{
+     width: 90%;
+}
+ .col-2{
+    width: 10%;
+}
+
+.row{
+    display:flex;
+    flex-direction: column;
+}

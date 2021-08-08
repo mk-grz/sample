@@ -1,0 +1,82 @@
+<div class="card">
+    <h1> Register </h1>
+</div>
+
+<mat-card class="example-card card" >
+
+<form #registerForm="ngForm"  (ngSubmit)="submit(registerForm)" >
+    
+    <mat-form-field >
+        <mat-label>Photo Id Proof</mat-label>
+        <mat-select [(ngModel)]="registerForm.id_proof" name="id_proof"  #id_proof = "ngModel" required>
+            <mat-option  *ngFor="let proof of photo_id_proof" value="{{proof.name}}" >{{proof.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    
+    <div class="danger" *ngIf=" !id_proof?.valid && (id_proof.dirty || id_proof.touched)">
+        Id Proof Required
+    </div>
+
+    <mat-form-field class="example-full-width">
+        <input type="text" matInput name="photo_id_no" required minlength="12" [(ngModel)]="registerForm.photo_id_no" #photo_id_no="ngModel" placeholder="Photo Id no" required>
+    </mat-form-field>
+
+
+    <div class="danger" *ngIf=" !photo_id_no?.valid && (photo_id_no.dirty || photo_id_no.touched)">
+        <div *ngIf="photo_id_no.errors.required">
+            Id Proof Number Required
+        </div>
+        <div *ngIf="photo_id_no.errors.minlength">
+            Min length is {{photo_id_no.errors.minlength.requiredLength}}
+        </div>
+    </div>
+
+
+    <br>
+    <mat-form-field class="example-full-width">
+        <input type="text" matInput name="name" [(ngModel)]="registerForm.name" #name="ngModel" placeholder="Name" required>
+    </mat-form-field>
+
+    <div class="danger" *ngIf=" !name?.valid && (name.dirty || name.touched)">
+        Name is Required
+    </div>
+
+    <br><br>
+      
+    <mat-radio-group [(ngModel)]="registerForm.selected_gender" #selected_gender="ngModel" name="selected_gender" aria-label="Select Gender" required>
+        <mat-radio-button  name="gender"  value="male"  >Male </mat-radio-button>
+        <mat-radio-button  name="gender"  value="female" >Female</mat-radio-button>
+        <mat-radio-button  name="gender"  value="other"  >Other</mat-radio-button>
+    </mat-radio-group>
+
+    <br>
+    <div class="danger" *ngIf=" !selected_gender?.valid && (selected_gender.dirty || selected_gender.touched)">
+        Gender is Required
+    </div>
+ 
+    <mat-form-field class="example-full-width">
+        <input matInput type="text" name="age" [(ngModel)]="registerForm.age" #age="ngModel" placeholder="Age" required>
+    </mat-form-field>
+
+    <br>
+    <div class="danger" *ngIf=" !age?.valid && (age.dirty || age.touched)">
+        Age is Required
+    </div>
+    <br>
+    
+    <input type="file" name="myImage" (change)="onChange($event)"[(ngModel)]="registerForm.fileUpload" #fileUpload="ngModel" accept="image/png" required>
+    <br><br><br>
+
+    <div class="danger" *ngIf=" !fileUpload?.valid && (fileUpload.dirty || fileUpload.touched)">
+        Age is Required
+    </div>
+
+    <button  type="button" class="submit" mat-raised-button (click)="onUpload()" color="primary" >Upload</button>
+    <br>
+    <p style="color: green;">{{uploadMessage}}</p>
+    <br>
+    <button type="submit"class="submit"  mat-flat-button color="primary" [disabled]="!registerForm.valid">Regsiter</button>
+</form>
+<br>
+
+</mat-card>

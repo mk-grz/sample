@@ -1,0 +1,53 @@
+<div class="card">
+  <h2>Mobile Number Verification</h2>
+</div>
+
+<mat-card class="example-card card" >
+  <form #otpForm="ngForm"  (ngSubmit)="getOtp(otpForm)" >
+    <mat-form-field class="example-full-width">
+      <input type="text" matInput name="phoneNo" [(ngModel)]="otpForm.phoneNo" #phoneNo = "ngModel" placeholder="Phone No" required minlength="10">
+    </mat-form-field>
+    <br>
+
+    <div class="danger" *ngIf=" !phoneNo?.valid && (phoneNo.dirty || phoneNo.touched)">
+      <div *ngIf="phoneNo.errors.required">
+          Phone Number Required*
+      </div>
+      <div *ngIf="phoneNo.errors.minlength">
+          Min length is {{phoneNo.errors.minlength.requiredLength}}
+      </div>
+    </div>
+    <br>
+      <button class="submit" mat-raised-button color="primary" [disabled]="!otpForm.valid">Submit</button>
+    <br><br>
+
+    </form>
+
+    <form #codeForm="ngForm"  (ngSubmit)="verifyCode(codeForm)" >
+  
+
+    <div class="display" style="display: none;">
+        <mat-form-field class="example-full-width">
+          <input type="text" matInput name="code" [(ngModel)]="codeForm.code" #code="ngModel" placeholder="Enter Otp " required>
+        </mat-form-field>
+        <br>
+
+        <div class="danger" *ngIf=" !code?.valid && (code.dirty || code.touched)">
+              Otp Required*
+        </div>
+    
+
+        <button class="submit" mat-raised-button color="primary" [disabled]="!codeForm.valid" >Verfiy Otp</button>
+    </div>
+
+  </form>
+  <br>
+  <!-- <form >
+    <input type="text" name="tempNo" [(ngModel)]="tempNo" placeholder="Phone No" >
+    <button (click)="navigate()">Submit</button>
+  </form> -->
+
+  {{status}}
+
+  </mat-card>
+

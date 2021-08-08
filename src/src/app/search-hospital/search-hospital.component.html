@@ -1,0 +1,97 @@
+<form >
+    <mat-card class="example-card card " >
+    <div >
+        <button class="toggle" mat-raised-button  (click)="toggle()">Search By PIN</button>
+        
+        <button class="toggle" mat-raised-button  (click)="getStates()">Search By District</button>
+    </div>
+    <div *ngIf="bool; else elseBlock">
+
+        <!-- <br><br>
+        <label for="state_selected">Select State</label>
+        <br>
+        -->
+        <br>
+        <mat-form-field >
+            <mat-label>Select State</mat-label>
+            <mat-select name="state_selected" [(ngModel)]="state_selected" (ngModelChange)="getDistrict($event)">
+                <mat-option *ngFor="let state of states" value="{{state.state_id}}" >{{state.state_name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+        <br>
+        <mat-form-field >
+            <mat-label>Select District</mat-label>
+            <mat-select name="district_selected" [(ngModel)]="district_selected">
+                <mat-option *ngFor="let district of cities" value="{{district.district_id}}" >{{district.district_name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+        <br><br>
+        <button class="submit" mat-raised-button color="primary" (click)="checkSlotByDistrict()">Search</button>
+        <br><br>
+    </div>
+
+    <ng-template #elseBlock>
+        <br><br>
+       
+        <mat-form-field class="example-full-width">
+            <input matInput type="text" name="PINcode" placeholder="Enter PIN Code" [(ngModel)]="PINcode">
+        </mat-form-field>
+     
+        <br><br>
+        <button class="submit" mat-raised-button color="primary"(click)="checkSlotByPin()">Search</button>
+        <br><br>
+    </ng-template>
+    
+    <div *ngIf='ageFilter'>
+        <br><br>
+        <button class="toggle" mat-raised-button  (click)="filterAge18()">Age 18+</button>
+        <button class="toggle" mat-raised-button  (click)="filterAge45()">Age 45+</button>
+    </div>
+    
+    </mat-card>
+    <br>
+    <div *ngFor = "let c of center">
+        <mat-card class="example-card card" >
+            <div class="col">
+            <div class="col-1">
+                <h3>{{c.name}}</h3>
+                <p>{{c.address}},{{c.district_name}},{{c.state_name}}</p>
+            
+                <div *ngIf= "c.fee!='0'" >
+                    <h4>Rs./{{c.fee}}</h4>
+                </div>
+
+                <p>Slots: {{c.available_capacity}}</p>
+                <h4 class>Age {{c.min_age_limit}}</h4>
+                <div *ngIf='c.available_capacity '>
+                    <h3 class="available">Available</h3>
+                </div>
+
+                <div *ngIf="age < 45; else elseBlk">
+                    <div *ngIf='c.available_capacity && (c.min_age_limit==18)'>
+                        <button mat-raised-button color="primary" (click)="bookSlot(c.name,c.address,c.district_name,c.state_name,c.vaccine,c.date,slots)">Book Now</button>
+                    </div>
+                </div>
+
+                <ng-template #elseBlk>
+                    <div *ngIf='c.available_capacity && (c.min_age_limit==45)'>
+                        <button mat-raised-button color="primary"  (click)="bookSlot(c.name,c.address,c.district_name,c.state_name,c.vaccine,c.date,slots)">Book Now</button>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="col-2">
+                <div class="row">
+                    <button mat-raised-button color="warn" class="tag">{{c.fee_type}}</button>
+                    <h5 class=" tag">{{c.vaccine}}</h5>
+                </div>
+            </div>
+            </div>
+            <br><br>
+        </mat-card>
+        <br>
+        </div>
+   
+</form>
+

@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.card{
+    text-align: center;
+    margin: 0 250px;
+}
+
+h1,h2{
+    color:blue;
+}
+.toolbar{
+    justify-content: center;
+}
+
+.submit{
+    width: 60%;
+}
+mat-form-field{
+    width: 60%;
+}
+mat-radio-button{
+    margin-right: 20px;
+}
+.danger{
+    color:red;
+    text-align: left;
+    margin-left: 150px;
+}
